@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Add New Product</h2>
+
+<form method="POST" action="{{ url_for('add_product') }}">
+    <div class="form-group">
+        <label>Product Name: <span style="color:red;">*</span></label>
+        <input type="text" name="product_name" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Product Type: <span style="color:red;">*</span></label>
+        <select name="product_type" required>
+            <option value="">Select Type</option>
+            <option value="Fertilizer">Fertilizer</option>
+            <option value="Pesticide">Pesticide</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label>Category: <span style="color:red;">*</span></label>
+        <input type="text" name="category" placeholder="e.g., Organic, Chemical, Insecticide" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Quantity: <span style="color:red;">*</span></label>
+        <input type="number" name="quantity" min="0" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Unit: <span style="color:red;">*</span></label>
+        <select name="unit" required>
+            <option value="">Select Unit</option>
+            <option value="kg">Kilograms (kg)</option>
+            <option value="ltr">Liters (ltr)</option>
+            <option value="bags">Bags</option>
+            <option value="bottles">Bottles</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label>Manufacturing Date: <span style="color:red;">*</span></label>
+        <input type="date" name="manufacturing_date" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Expiry Date: <span style="color:red;">*</span></label>
+        <input type="date" name="expiry_date" required>
+        <small style="color: #666;">Note: Cannot add products that are already expired</small>
+    </div>
+    
+    <div class="form-group">
+        <label>Price (₹): <span style="color:red;">*</span></label>
+        <input type="number" step="0.01" name="price" min="0" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Supplier Name:</label>
+        <input type="text" name="supplier_name">
+    </div>
+    
+    <div class="form-group">
+        <label>Batch Number:</label>
+        <input type="text" name="batch_number">
+    </div>
+    
+    <div class="form-group">
+        <label>Storage Location:</label>
+        <input type="text" name="storage_location" placeholder="e.g., Warehouse A, Shelf 3">
+    </div>
+    
+    <button type="submit" class="btn btn-success">Add Product</button>
+    <a href="{{ url_for('index') }}" class="btn btn-danger">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Product Details</h2>
+
+<table>
+    <tr>
+        <th>Field</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td><strong>Product Name</strong></td>
+        <td>{{ product['product_name'] }}</td>
+    </tr>
+    <tr>
+        <td><strong>Product Type</strong></td>
+        <td>{{ product['product_type'] }}</td>
+    </tr>
+    <tr>
+        <td><strong>Category</strong></td>
+        <td>{{ product['category'] }}</td>
+    </tr>
+    <tr>
+        <td><strong>Quantity</strong></td>
+        <td>
+            {{ product['quantity'] }} {{ product['unit'] }}
+            {% if product['quantity'] < 50 %}
+            <span style="color: orange; font-weight: bold;">⚠️ Low Stock</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td><strong>Manufacturing Date</strong></td>
+        <td>{{ product['manufacturing_date'] }}</td>
+    </tr>
+    <tr>
+        <td><strong>Expiry Date</strong></td>
+        <td>{{ product['expiry_date'] }}</td>
+    </tr>
+    <tr>
+        <td><strong>Price</strong></td>
+        <td>₹{{ product['price'] }}</td>
+    </tr>
+    <tr>
+        <td><strong>Supplier Name</strong></td>
+        <td>{{ product['supplier_name'] if product['supplier_name'] else 'N/A' }}</td>
+    </tr>
+    <tr>
+        <td><strong>Batch Number</strong></td>
+        <td>{{ product['batch_number'] if product['batch_number'] else 'N/A' }}</td>
+    </tr>
+    <tr>
+        <td><strong>Storage Location</strong></td>
+        <td>{{ product['storage_location'] if product['storage_location'] else 'N/A' }}</td>
+    </tr>
+    <tr>
+        <td><strong>Date Added</strong></td>
+        <td>{{ product['date_added'] }}</td>
+    </tr>
+    {% if product['last_updated'] %}
+    <tr>
+        <td><strong>Last Updated</strong></td>
+        <td>{{ product['last_updated'] }}</td>
+    </tr>
+    {% endif %}
+</table>
+
+<div style="margin-top: 20px;">
+    <a href="{{ url_for('update_product', id=product['id']) }}" class="btn btn-success">Edit Product</a>
+    <a href="{{ url_for('delete_product', id=product['id']) }}" 
+       class="btn btn-danger" 
+       onclick="return confirm('Are you sure you want to delete this product?')">Delete Product</a>
+    <a href="{{ url_for('index') }}" class="btn btn-primary">Back to List</a>
+</div>
+{% endblock %}

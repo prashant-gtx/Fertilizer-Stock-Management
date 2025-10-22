@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Update Product</h2>
+
+<form method="POST" action="{{ url_for('update_product', id=product['id']) }}">
+    <div class="form-group">
+        <label>Product Name: <span style="color:red;">*</span></label>
+        <input type="text" name="product_name" value="{{ product['product_name'] }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Product Type: <span style="color:red;">*</span></label>
+        <select name="product_type" required>
+            <option value="Fertilizer" {% if product['product_type'] == 'Fertilizer' %}selected{% endif %}>Fertilizer</option>
+            <option value="Pesticide" {% if product['product_type'] == 'Pesticide' %}selected{% endif %}>Pesticide</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label>Category: <span style="color:red;">*</span></label>
+        <input type="text" name="category" value="{{ product['category'] }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Quantity: <span style="color:red;">*</span></label>
+        <input type="number" name="quantity" value="{{ product['quantity'] }}" min="0" required>
+        <small style="color: #666;">Note: Low stock alert triggers when quantity < 50</small>
+    </div>
+    
+    <div class="form-group">
+        <label>Unit: <span style="color:red;">*</span></label>
+        <select name="unit" required>
+            <option value="kg" {% if product['unit'] == 'kg' %}selected{% endif %}>Kilograms (kg)</option>
+            <option value="ltr" {% if product['unit'] == 'ltr' %}selected{% endif %}>Liters (ltr)</option>
+            <option value="bags" {% if product['unit'] == 'bags' %}selected{% endif %}>Bags</option>
+            <option value="bottles" {% if product['unit'] == 'bottles' %}selected{% endif %}>Bottles</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label>Manufacturing Date: <span style="color:red;">*</span></label>
+        <input type="date" name="manufacturing_date" value="{{ product['manufacturing_date'] }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Expiry Date: <span style="color:red;">*</span></label>
+        <input type="date" name="expiry_date" value="{{ product['expiry_date'] }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Price (₹): <span style="color:red;">*</span></label>
+        <input type="number" step="0.01" name="price" value="{{ product['price'] }}" min="0" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Supplier Name:</label>
+        <input type="text" name="supplier_name" value="{{ product['supplier_name'] }}">
+    </div>
+    
+    <div class="form-group">
+        <label>Batch Number:</label>
+        <input type="text" name="batch_number" value="{{ product['batch_number'] }}">
+    </div>
+    
+    <div class="form-group">
+        <label>Storage Location:</label>
+        <input type="text" name="storage_location" value="{{ product['storage_location'] }}">
+    </div>
+    
+    <button type="submit" class="btn btn-success">Update Product</button>
+    <a href="{{ url_for('index') }}" class="btn btn-danger">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2>Stock Alerts & Notifications</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Sr.No</th>
+            <th>Alert Type</th>
+            <th>Product Name</th>
+            <th>Message</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if alerts %}
+            {% for alert in alerts %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    {% if alert['alert_type'] == 'LOW_STOCK' %}
+                    <span style="color: orange;">⚠️ Low Stock</span>
+                    {% elif alert['alert_type'] == 'EXPIRY_WARNING' %}
+                    <span style="color: red;">⏰ Expiry Warning</span>
+                    {% else %}
+                    {{ alert['alert_type'] }}
+                    {% endif %}
+                </td>
+                <td>{{ alert['product_name'] }}</td>
+                <td>{{ alert['message'] }}</td>
+                <td>{{ alert['alert_date'] }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5" style="text-align: center;">No alerts</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+<div style="margin-top: 20px;">
+    <a href="{{ url_for('index') }}" class="btn btn-primary">Back to Stock</a>
+</div>
+{% endblock %}
